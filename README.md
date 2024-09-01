@@ -1,4 +1,4 @@
-# Memo Todo
+# Mimo Todo
 
 Memo Todo is a Flutter application designed to help users manage their tasks and categories efficiently. It leverages modern Flutter features and libraries to provide a seamless user experience.
 
