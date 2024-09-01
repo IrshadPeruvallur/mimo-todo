@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:memo_todo/authentication/controller/auth_controller.dart';
-import 'package:memo_todo/authentication/view/login_screen.dart';
 import 'package:memo_todo/authentication/view/toggle_auth.dart';
 import 'package:memo_todo/features/task/controller/category_controller.dart';
 import 'package:memo_todo/features/task/controller/task_controller.dart';
+import 'package:memo_todo/features/user/controller/user_controller.dart';
 import 'package:memo_todo/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -30,8 +30,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => TaskController(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => UserController(),
+        ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: ToggleAuth(),
       ),

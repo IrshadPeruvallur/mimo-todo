@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:memo_todo/authentication/model/auth_model.dart';
+import 'package:memo_todo/features/user/model/user_model.dart';
 import 'package:memo_todo/service/auth_service.dart';
 import 'package:memo_todo/utils/handle_firebase_auth_exception.dart';
 
@@ -11,57 +9,81 @@ class AuthController extends ChangeNotifier {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
 
+  bool isLoading = false;
+
   Future<String?> registerUser() async {
-    AuthModel authModel = AuthModel(
+    isLoading = true;
+    notifyListeners();
+
+    UserModel userModel = UserModel(
       email: emailController.text,
       password: passwordController.text,
-      fullName: fullNameController.text,
+      fullname: fullNameController.text,
     );
 
-    var result = await authService.registerUser(authModel);
+    var result = await authService.registerUser(userModel);
+
+    isLoading = false;
+    notifyListeners();
 
     if (result is FirebaseAuthException) {
       return handleFirebaseAuthException(result);
     }
 
-    notifyListeners();
     return null;
   }
 
   Future<String?> loginUser() async {
+    isLoading = true;
+    notifyListeners();
+
     var result = await authService.loginUser(
       emailController.text,
       passwordController.text,
     );
 
+    isLoading = false;
+    notifyListeners();
+
     if (result is FirebaseAuthException) {
       return handleFirebaseAuthException(result);
     }
 
-    notifyListeners();
     return null;
   }
 
   Future<String?> logoutUser() async {
+    isLoading = true;
+    notifyListeners();
+
     try {
       await authService.logoutUser();
+      isLoading = false;
       notifyListeners();
       return null;
     } catch (e) {
+      isLoading = false;
+      notifyListeners();
       return "Logout Error: $e";
     }
   }
 
   Future<String?> forgotPassword() async {
+    isLoading = true;
+    notifyListeners();
+
     var result = await authService.sendPasswordResetEmail(emailController.text);
+
+    isLoading = false;
+    notifyListeners();
 
     if (result is FirebaseAuthException) {
       return handleFirebaseAuthException(result);
     }
 
-    notifyListeners();
     return null;
   }
 
@@ -69,6 +91,7 @@ class AuthController extends ChangeNotifier {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     fullNameController.dispose();
     super.dispose();
   }

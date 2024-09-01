@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 class CategoryTasksScreen extends StatefulWidget {
   final CategoryModel category;
 
-  CategoryTasksScreen({required this.category});
+  const CategoryTasksScreen({super.key, required this.category});
 
   @override
   State<CategoryTasksScreen> createState() => _CategoryTasksScreenState();
@@ -40,7 +40,7 @@ class _CategoryTasksScreenState extends State<CategoryTasksScreen> {
       ),
       body: Consumer<TaskController>(builder: (context, value, child) {
         if (value.isLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -80,7 +80,7 @@ class _CategoryTasksScreenState extends State<CategoryTasksScreen> {
                             onPressed: () {
                               value.deleteTask(widget.category.id, task.id!);
                             },
-                            icon: Icon(Icons.delete)),
+                            icon: const Icon(Icons.delete)),
                         leading: InkWell(
                           onTap: () {
                             value.updateTask(TaskModel(
@@ -99,7 +99,7 @@ class _CategoryTasksScreenState extends State<CategoryTasksScreen> {
                                   ? Colors.green
                                   : Colors.white,
                               child: task.isComplete!
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.check,
                                       size: 16,
                                       color: whiteColor,
@@ -129,12 +129,12 @@ class _CategoryTasksScreenState extends State<CategoryTasksScreen> {
             },
           );
         },
-        child: Icon(
+        backgroundColor: secondaryColor,
+        shape: const CircleBorder(),
+        child: const Icon(
           Icons.add,
           color: whiteColor,
         ),
-        backgroundColor: secondaryColor,
-        shape: CircleBorder(),
       ),
     );
   }

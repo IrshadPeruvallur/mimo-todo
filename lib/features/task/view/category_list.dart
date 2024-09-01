@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:memo_todo/constants/colors.dart';
 import 'package:memo_todo/features/task/controller/category_controller.dart';
@@ -8,27 +7,13 @@ import 'package:memo_todo/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CategoryList extends StatefulWidget {
+class CategoryList extends StatelessWidget {
   const CategoryList({
     super.key,
     required this.size,
   });
 
   final Size size;
-
-  @override
-  State<CategoryList> createState() => _CategoryListState();
-}
-
-class _CategoryListState extends State<CategoryList> {
-  @override
-  void initState() {
-    super.initState();
-    // Schedule the fetchCategories() call after the build phase
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<CategoryController>(context, listen: false).fetchCategories();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +25,7 @@ class _CategoryListState extends State<CategoryList> {
               crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              childAspectRatio:
-                  (widget.size.width / 2) / (widget.size.height / 4),
+              childAspectRatio: (size.width / 2) / (size.height / 4),
             ),
             itemCount: 4,
             itemBuilder: (context, index) {
@@ -66,7 +50,7 @@ class _CategoryListState extends State<CategoryList> {
                           color: Colors.grey,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Shimmer.fromColors(
                         baseColor: Colors.grey[300]!,
                         highlightColor: greyColor,
@@ -76,7 +60,7 @@ class _CategoryListState extends State<CategoryList> {
                           color: Colors.grey,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Shimmer.fromColors(
                         baseColor: Colors.grey[300]!,
                         highlightColor: greyColor,
@@ -99,8 +83,7 @@ class _CategoryListState extends State<CategoryList> {
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
-            childAspectRatio:
-                (widget.size.width / 2) / (widget.size.height / 4),
+            childAspectRatio: (size.width / 2) / (size.height / 4),
           ),
           itemCount: value.categories.length + 1,
           itemBuilder: (context, index) {
@@ -111,7 +94,7 @@ class _CategoryListState extends State<CategoryList> {
                     context: context,
                     barrierColor: Colors.white.withOpacity(.8),
                     builder: (BuildContext context) {
-                      return AddCategoryCard(size: widget.size);
+                      return AddCategoryCard(size: size);
                     },
                   );
                 },
@@ -121,7 +104,7 @@ class _CategoryListState extends State<CategoryList> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Icon(Icons.add, size: 30),
                   ),
                 ),
@@ -133,7 +116,7 @@ class _CategoryListState extends State<CategoryList> {
                     context: context,
                     barrierColor: Colors.white.withOpacity(.8),
                     builder: (BuildContext context) {
-                      return AddCategoryCard(size: widget.size);
+                      return AddCategoryCard(size: size);
                     }),
                 onTap: () => Navigator.push(
                   context,
@@ -158,11 +141,11 @@ class _CategoryListState extends State<CategoryList> {
                         CustomText(
                           text: category.icon,
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         CustomText(
                           text: category.title,
                         ),
-                        CustomText(
+                        const CustomText(
                           text: 'X tasks',
                           size: 13,
                           color: greyColor,

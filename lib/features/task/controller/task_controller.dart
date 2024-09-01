@@ -1,6 +1,7 @@
+// ignore_for_file: empty_catches, duplicate_ignore
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:memo_todo/features/task/model/category_model.dart';
 import 'package:memo_todo/features/task/model/task_model.dart';
 import 'package:memo_todo/service/firestore_service.dart';
 
@@ -14,6 +15,7 @@ class TaskController extends ChangeNotifier {
     isLoading = true;
     try {
       tasks = await _firestoreService.getAllTasks(categoryId);
+      // ignore: empty_catches
     } catch (e) {}
     isLoading = false;
     notifyListeners();

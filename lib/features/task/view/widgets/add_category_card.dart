@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:memo_todo/constants/colors.dart';
 import 'package:memo_todo/features/task/controller/category_controller.dart';
@@ -23,7 +25,7 @@ class AddCategoryCard extends StatelessWidget {
         child: Card(
           color: whiteColor,
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,9 +50,9 @@ class AddCategoryCard extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: CustomText(text: 'Cancel'),
+                      child: const CustomText(text: 'Cancel'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     ElevatedButton(
@@ -60,7 +62,7 @@ class AddCategoryCard extends StatelessWidget {
                         await categoryController.addCategory();
                         Navigator.pop(context);
                       },
-                      child: CustomText(
+                      child: const CustomText(
                         text: 'Save',
                         color: whiteColor,
                       ),

@@ -1,5 +1,4 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:memo_todo/constants/colors.dart';
@@ -29,7 +28,6 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     bool isPassword = type == TextFieldType.password;
 
     return Padding(
@@ -89,7 +87,8 @@ class CustomTextField extends StatelessWidget {
       return "Please enter a valid email address";
     } else if (type == TextFieldType.password && value.length < 6) {
       return 'Password should be at least 6 characters';
-    } else if (type == TextFieldType.password && value != cnfController?.text) {
+    } else if (type == TextFieldType.confirmPassword &&
+        value != controller?.text) {
       return 'Passwords do not match';
     }
     return null;

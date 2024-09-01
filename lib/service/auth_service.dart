@@ -1,21 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:memo_todo/authentication/model/auth_model.dart';
+import 'package:memo_todo/features/user/model/user_model.dart';
+import 'package:memo_todo/service/firestore_service.dart';
 
 class AuthService {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  Future<dynamic> registerUser(AuthModel authModel) async {
+  Future<dynamic> registerUser(UserModel userModel) async {
     try {
       UserCredential userCredential =
           await firebaseAuth.createUserWithEmailAndPassword(
-        email: authModel.email!,
-        password: authModel.password!,
+        email: userModel.email!,
+        password: userModel.password!,
       );
 
       if (!userCredential.user!.emailVerified) {
         await userCredential.user!.sendEmailVerification();
       }
-
+      await FirestoreService().createUser(UserModel(
+          email: userModel.email,
+          fullname: userModel.email,
+          uid: userCredential.user!.uid));
       return userCredential;
     } on FirebaseAuthException catch (e) {
       return e;
