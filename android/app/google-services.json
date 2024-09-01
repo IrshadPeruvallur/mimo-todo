@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "166985440014",
+    "project_id": "mimo-todo",
+    "storage_bucket": "mimo-todo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166985440014:android:2aded86d7d51324fbad55f",
+        "android_client_info": {
+          "package_name": "com.example.memo_todo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA9P9dRmURoiKIyBwcHIDXOgYpPoeo9Hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
